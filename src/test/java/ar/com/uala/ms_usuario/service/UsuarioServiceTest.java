@@ -21,6 +21,7 @@ public class UsuarioServiceTest {
     @PersistenceContext
     private EntityManager em;
 
+    //Metodo seguir
     @Test
     public void seguir_conUsuarioLogueadoIdNulo_lanzaExcepcion() {
         Usuario usuario = UsuarioBuilder
@@ -159,6 +160,43 @@ public class UsuarioServiceTest {
         assertThat(seguidor.getSeguidos())
                 .isNotEmpty()
                 .containsOnly(usuario1.getId(), usuario3.getId());
+    }
+
+    //Metodo buscarPorId
+    @Test
+    public void buscarPorId_conIdNulo_lanzaExcepcion() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> usuarioService.buscarPorId(null))
+                .withMessage("El ID del usuario no puede ser nulo");
+    }
+
+    @Test
+    public void buscarPorId_conIdDeUsuarioNoPersistido_lanzaExcepcion() {
+        Usuario usuario = UsuarioBuilder
+                .crear()
+                .conId(3L)
+                .conNombre("ezortega")
+                .sinSeguidores()
+                .build();
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> usuarioService.buscarPorId(usuario.getId()))
+                .withMessage("El usuario no existe");
+    }
+
+    @Test
+    public void buscarPorId_conIdDeUsuarioPersistido_retornaUsuario() {
+        Usuario usuario = UsuarioBuilder
+                .crear()
+                .conNombre("ezortega")
+                .sinSeguidores()
+                .buildAndPersist(em);
+
+        Usuario usuarioEncontrado = usuarioService.buscarPorId(usuario.getId());
+
+        assertThat(usuarioEncontrado)
+                .usingRecursiveComparison()
+                .comparingOnlyFields("id", "nombre");
     }
 
 }

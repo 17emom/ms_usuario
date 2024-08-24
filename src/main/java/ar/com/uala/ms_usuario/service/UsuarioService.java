@@ -23,6 +23,14 @@ public class UsuarioService {
         return usuarioRepository.save(usuarioSeguidor);
     }
 
+    public Usuario buscarPorId(Long usuarioId) {
+        validarDatoEntrada(usuarioId);
+
+        return usuarioRepository
+                .findById(usuarioId)
+                .orElseThrow(() -> new IllegalArgumentException("El usuario no existe"));
+    }
+
     private void validarDatoEntrada(Long id) {
         Assert.notNull(id, "El ID del usuario no puede ser nulo");
         Assert.isTrue(usuarioRepository.existsById(id), "El usuario no existe");

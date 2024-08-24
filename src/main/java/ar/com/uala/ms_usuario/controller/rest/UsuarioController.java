@@ -18,4 +18,10 @@ public class UsuarioController {
     public Usuario seguir(@PathVariable("usuarioLogueadoId") Long usuarioLogueadoId, @PathVariable("usuarioASeguirId") Long usuarioASeguirId) {
         return usuarioService.seguir(usuarioLogueadoId, usuarioASeguirId);
     }
+
+    @GetMapping("/{usuarioId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Usuario buscarPorId(@PathVariable("usuarioId") Long usuarioId) {
+        return usuarioService.buscarPorId(usuarioId);
+    }
 }
