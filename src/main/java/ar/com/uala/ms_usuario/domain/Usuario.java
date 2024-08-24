@@ -1,4 +1,4 @@
-package ar.com.uala.ms_usuario;
+package ar.com.uala.ms_usuario.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,10 +19,11 @@ public class Usuario {
 
     private String nombre;
 
+    @ElementCollection
     @CollectionTable(
             name = "seguidor",
             joinColumns = @JoinColumn(name = "seguidor_id")
     )
     @Column(name = "seguido_id")
-    private List<Long> seguidores;
+    private List<Long> seguidos;
 }

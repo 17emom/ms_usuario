@@ -1,6 +1,6 @@
 package ar.com.uala.ms_usuario.repository;
 
-import ar.com.uala.ms_usuario.Usuario;
+import ar.com.uala.ms_usuario.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,16 +1,12 @@
 package ar.com.uala.ms_usuario.controller.rest;
 
-import ar.com.uala.ms_usuario.Usuario;
+import ar.com.uala.ms_usuario.domain.Usuario;
 import ar.com.uala.ms_usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/usuario")
 public class UsuarioController {
 
@@ -19,7 +15,7 @@ public class UsuarioController {
 
     @PostMapping("/{usuarioLogueadoId}/seguido/{usuarioASeguirId}")
     @ResponseStatus(HttpStatus.OK)
-    public Usuario seguir(@PathVariable("usuarioLogueadoId") Long usuarioLogueadoId, @PathVariable("usuarioLogueadoId") Long usuarioASeguirId) {
+    public Usuario seguir(@PathVariable("usuarioLogueadoId") Long usuarioLogueadoId, @PathVariable("usuarioASeguirId") Long usuarioASeguirId) {
         return usuarioService.seguir(usuarioLogueadoId, usuarioASeguirId);
     }
 }

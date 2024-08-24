@@ -1,6 +1,6 @@
 package ar.com.uala.ms_usuario.service;
 
-import ar.com.uala.ms_usuario.Usuario;
+import ar.com.uala.ms_usuario.domain.Usuario;
 import ar.com.uala.ms_usuario.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class UsuarioService {
         validarAutoSeguimiento(seguidorId, seguidoId);
         Usuario usuarioSeguidor = usuarioRepository.findById(seguidorId).orElseThrow(() -> new IllegalArgumentException("El usuario no existe"));
         validarSeguimientoExistente(usuarioSeguidor, seguidoId);
-        usuarioSeguidor.getSeguidores().add(seguidoId);
+        usuarioSeguidor.getSeguidos().add(seguidoId);
 
         return usuarioRepository.save(usuarioSeguidor);
     }
@@ -33,6 +33,6 @@ public class UsuarioService {
     }
 
     private void validarSeguimientoExistente(Usuario usuarioSeguidor, Long seguidoId) {
-        Assert.isTrue(!usuarioSeguidor.getSeguidores().contains(seguidoId), "El usuario ya lo seguía");
+        Assert.isTrue(!usuarioSeguidor.getSeguidos().contains(seguidoId), "El usuario ya lo seguía");
     }
 }

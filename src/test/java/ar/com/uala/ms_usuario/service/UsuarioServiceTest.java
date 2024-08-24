@@ -1,6 +1,6 @@
 package ar.com.uala.ms_usuario.service;
 
-import ar.com.uala.ms_usuario.Usuario;
+import ar.com.uala.ms_usuario.domain.Usuario;
 import ar.com.uala.ms_usuario.builder.UsuarioBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -131,7 +131,7 @@ public class UsuarioServiceTest {
 
         Usuario seguidor = usuarioService.seguir(usuario1.getId(), usuario2.getId());
 
-        assertThat(seguidor.getSeguidores())
+        assertThat(seguidor.getSeguidos())
                 .isNotEmpty()
                 .containsOnly(usuario2.getId());
     }
@@ -156,7 +156,7 @@ public class UsuarioServiceTest {
 
         Usuario seguidor = usuarioService.seguir(usuario2.getId(), usuario3.getId());
 
-        assertThat(seguidor.getSeguidores())
+        assertThat(seguidor.getSeguidos())
                 .isNotEmpty()
                 .containsOnly(usuario1.getId(), usuario3.getId());
     }

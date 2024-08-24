@@ -3,7 +3,7 @@ package ar.com.uala.ms_usuario.builder;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.com.uala.ms_usuario.Usuario;
+import ar.com.uala.ms_usuario.domain.Usuario;
 import jakarta.persistence.EntityManager;
 
 public class UsuarioBuilder {
