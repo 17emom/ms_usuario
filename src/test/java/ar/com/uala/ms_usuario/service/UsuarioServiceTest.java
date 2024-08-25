@@ -196,7 +196,8 @@ public class UsuarioServiceTest {
 
         assertThat(usuarioEncontrado)
                 .usingRecursiveComparison()
-                .comparingOnlyFields("id", "nombre");
+                .comparingOnlyFields("id", "nombre")
+                .isEqualTo(usuario);
     }
 
 }
